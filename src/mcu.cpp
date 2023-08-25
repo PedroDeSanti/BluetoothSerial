@@ -15,6 +15,10 @@
  * Public Function Body Definitions
  *****************************************/
 
+// extern "C" {
+// void SystemClock_Config(void);
+// }
+
 void mcu_init(void) {
     HAL_Init();
 

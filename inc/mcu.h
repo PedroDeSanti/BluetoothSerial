@@ -22,7 +22,9 @@ void mcu_init(void);
  * @brief Initializes System Clock.
  * @note  Defined by cube.
  */
+extern "C" {
 void SystemClock_Config(void);
+}
 
 /**
  * @brief Put the MCU to sleep.
