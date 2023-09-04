@@ -6,6 +6,7 @@
 
 #include "mcu.h"
 #include "bluetooth_var.h"
+#include "bluetooth_service.h"
 
 /*****************************************
  * Private Constant Definitions
@@ -13,8 +14,8 @@
 
 #define LED_TOGGLE_DELAY_MS 1500
 
-BluetoothVar led_toggle_delay_ms = BluetoothVar("led_toggle_delay_ms", 1500);
-BluetoothVar counter = BluetoothVar("counter");
+BluetoothVar<uint32_t> led_toggle_delay_ms("led_toggle_delay_ms", 500);
+BluetoothVar<uint32_t> counter("counter");
 
 /*****************************************
  * Main Function
@@ -22,17 +23,21 @@ BluetoothVar counter = BluetoothVar("counter");
 
 int main(void) {
     mcu_init();
+    BluetoothService bluetooth_service = BluetoothService();
+
+    counter = 0;
 
     for (;;) {
         led_toggle();
-        mcu_sleep(led_toggle_delay_ms.get_value());
 
-        if (counter.get_value() < 20) {
+        if (counter < 100) {
             counter++;
         } else {
             counter--;
         }
 
-        // updateoh
+        mcu_sleep(led_toggle_delay_ms.get_value());
+
+        bluetooth_service.update();
     }
 }
