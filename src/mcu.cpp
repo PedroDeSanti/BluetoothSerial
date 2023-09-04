@@ -15,9 +15,9 @@
  * Public Function Body Definitions
  *****************************************/
 
-// extern "C" {
-// void SystemClock_Config(void);
-// }
+extern "C" {
+void SystemClock_Config(void);
+}
 
 void mcu_init(void) {
     HAL_Init();
@@ -32,5 +32,5 @@ void mcu_sleep(uint32_t ms) {
 }
 
 void led_toggle(void) {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 }
