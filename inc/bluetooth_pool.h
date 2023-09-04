@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <cstdint>
-#include "bluetooth_var.h"
+#include "serializable_interface.h"
 
 /*****************************************
  * Class Definition
@@ -14,12 +14,16 @@ class BluetoothPool {
     public:
         static BluetoothPool* get_instance();
 
+        void add_var(uint16_t var_id, ISerializable* var);
+
+        ISerializable* get_var(uint16_t var_id);
+
+        std::map<uint16_t, ISerializable*> var_id_map;
+
     private:
         static BluetoothPool* instance;
 
         BluetoothPool() { }
-
-        std::map<uint16_t, BluetoothVar<int>*> var_id_to_name;
 };
 
 #endif // __BLUETOOTH_POOL_H__
